@@ -1,0 +1,27 @@
+version: "2"
+networks:
+  test:
+services:
+  api:
+    # # sri-flask-hello:
+    # container_name: sri-flask-gunicorn
+    # image: fastapi-nginx-gunicorn_api:latest
+    build: .
+    container_name: fastapi-application   
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    environment:
+      PORT: 8000
+      DEBUG: 1      
+      # NVIDIA_VISIBLE_DEVICES: all
+    volumes: 
+      - /home/sridhar_mindtrace_ai/sri/fastapi/app/main.py:/app/main.py  
+    ports:
+      - '8000:8000'
+    restart: "no"
