@@ -1,0 +1,39 @@
+---
+name: Build and Push Python Image to Google Cloud Platform
+on:
+  push:
+    branches: [ main ]
+jobs:
+  build-push-gcr:
+    name: Build and Push to GCP
+    runs-on: ubuntu-latest
+    env:
+      IMAGE_NAME: fast_api
+      PROJECT_ID: mt-2d-portal
+      REPOSITORY_NAME: git-hub-actions
+      DOCKER_PKG_LOCATION: europe-west2-docker.pkg.dev
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - uses: google-github-actions/setup-gcloud@master
+      with:
+        service_account_key: ${{ secrets.SERVICE_ACCOUNT_KEY }}
+        project_id: ${{ env.PROJECT_ID }}
+        export_default_credentials: true
+
+    - name: Build Docker Image
+      run: docker build -t $IMAGE_NAME:latest .
+
+   
+    - name: Configure Docker Client
+      run: |-
+        gcloud auth configure-docker --quiet
+        gcloud auth configure-docker $DOCKER_PKG_LOCATION --quiet
+
+  
+    - name: Push Docker Image to Artifact Registry
+      run: |-
+        docker tag $IMAGE_NAME:latest $DOCKER_PKG_LOCATION/$PROJECT_ID/$REPOSITORY_NAME/$IMAGE_NAME:latest
+        docker push $DOCKER_PKG_LOCATION/$PROJECT_ID/$REPOSITORY_NAME/$IMAGE_NAME:latest
+        
