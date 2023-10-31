@@ -43,6 +43,8 @@ WORKDIR /app
 
 COPY requirements.txt ./
 RUN pip install --no-cache-dir --upgrade -r requirements.txt
+RUN apt-get clean
+RUN rm -rf /var/lib/apt/lists/*
 
 # Default port for BentoServer
 # EXPOSE 8000
