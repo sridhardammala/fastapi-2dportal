@@ -4,8 +4,13 @@ import time
 import requests
 import concurrent.futures
 import datetime
+import os
 
 app = FastAPI()
+backend_service_url = os.environ.get('backend_service_url')
+print(f'backend_service_url fetched from the environment variable: {backend_service_url}')
+# backend_service_url = "https://adient-demo.mlmodels.mindtrace.ai/pipeline"
+
 
 # Replace with your JSON object
 json_object = {
@@ -36,7 +41,7 @@ json_object = {
         }
 
 # Replace with your backend service URL
-backend_service_url = "https://adient-demo.mlmodels.mindtrace.ai/pipeline"
+
 # backend_service_url = "https://demo-adient.mlmodels.mindtrace.ai/pipeline"
 # backend_service_url = "http://34.31.77.20:3000/pipeline"
 
