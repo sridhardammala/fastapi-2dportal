@@ -8,7 +8,7 @@ jobs:
     name: Build and Push to GCP
     runs-on: ubuntu-latest
     env:
-      IMAGE_NAME: flask-admin 
+      IMAGE_NAME: fastapi-2dportal
       PROJECT_ID: mt-2dportal
       REPOSITORY_NAME: git-hub-artifcats
       DOCKER_PKG_LOCATION: europe-west4-docker.pkg.dev
