@@ -106,7 +106,7 @@ def read_item(item_id: int, q: str = None):
 async def create_item(item: dict):
 	print("Hello")
 	print(f'received item :{item} and {type(item)}')
-	print(f'backend_service_url fetched from the environment variable: {backend_service_url}')
+	print(f'backend_service_url fetched from the environment  variable: {backend_service_url}')
 	measure_time()
 	return {"item": item}
 
