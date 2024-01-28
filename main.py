@@ -8,7 +8,7 @@ import os
 
 app = FastAPI()
 backend_service_url = os.environ.get('backend_service_url')
-print(f'backend_service_url fetched from the environment variable: {backend_service_url}')
+
 # backend_service_url = "https://adient-demo.mlmodels.mindtrace.ai/pipeline"
 
 
@@ -106,6 +106,7 @@ def read_item(item_id: int, q: str = None):
 async def create_item(item: dict):
 	print("Hello")
 	print(f'received item :{item} and {type(item)}')
+	print(f'backend_service_url fetched from the environment variable: {backend_service_url}')
 	measure_time()
 	return {"item": item}
 
