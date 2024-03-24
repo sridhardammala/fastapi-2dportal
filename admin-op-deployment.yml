@@ -15,5 +15,9 @@ spec:
       containers:
       - name: admin-op
         image: fastapiadmin.azurecr.io/admin-op:latest  # Replace 'your-acr-name' with your actual ACR name
+        imagePullPolicy: Always
+        env:
+        - name: test
+          value: test
         ports:
         - containerPort: 5000
