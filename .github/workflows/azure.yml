@@ -63,6 +63,11 @@ jobs:
         uses: azure/login@v1.4.3
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - name: 'Run Azure CLI commands'
+        run: |
+            az account show
+            az group list
+            pwd 
       # Builds and pushes an image up to your Azure Container Registry
       - name: Build and push image to ACR
         run: |
