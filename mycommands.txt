@@ -1,3 +1,5 @@
-docker image rm -f fastapi_api:latest
-docker-compose down
-docker-compose up
+az acr login --name fastapiadmin
+docker image rm -f admin-op:latest
+docker build -t admin-op:latest .
+docker tag admin-op:latest fastapiadmin.azurecr.io/admin-op:latest
+docker push fastapiadmin.azurecr.io/admin-op:latest

@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: admin-op
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: admin-op
+  template:
+    metadata:
+      labels:
+        app: admin-op
+    spec:
+      containers:
+      - name: admin-op
+        image: fastapiadmin.azurecr.io/admin-op:latest  # Replace 'your-acr-name' with your actual ACR name
+        ports:
+        - containerPort: 5000
